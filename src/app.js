@@ -26,7 +26,7 @@ function showTemperature(response) {
 
 function searchCity(city) {
   let apiKey = "281450ec88936f4fa8ee9864682b49a0";
-  let apiUrlCoords = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
+  let apiUrlCoords = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
   axios.get(apiUrlCoords).then(getTemperatureBasedOnCoordinates);
 }
 
