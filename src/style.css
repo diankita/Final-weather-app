@@ -8,7 +8,7 @@
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 36px;
 }
 
 ul {
@@ -19,7 +19,7 @@ ul {
   padding: 0;
 }
 
-#description {
+li:first-letter {
   text-transform: capitalize;
 }
 

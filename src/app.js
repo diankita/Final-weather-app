@@ -1,3 +1,28 @@
+function formatDate(date) {
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[date.getDay()];
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  let dateElement = document.querySelector("#date");
+  dateElement.innerHTML = `${day} ${hours}:${minutes}`;
+}
+
+formatDate(new Date());
+
 function getTemperatureBasedOnCoordinates(response) {
   let lat = response.data[0].lat;
   let lon = response.data[0].lon;
@@ -9,7 +34,7 @@ function getTemperatureBasedOnCoordinates(response) {
 
 function showTemperature(response) {
   let temperatureElement = document.querySelector("#degrees");
-  temperatureElement.innerHTML = Math.round (response.data.main.temp);
+  temperatureElement.innerHTML = Math.round(response.data.main.temp);
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
   let descriptionElement = document.querySelector("#description");
@@ -21,7 +46,6 @@ function showTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = response.data.main.humidity;
   console.log(response.data);
-
 }
 
 function searchCity(city) {
