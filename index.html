@@ -18,6 +18,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src/style.css" />
     <title>Weather forecast</title>
   </head>
@@ -27,14 +28,14 @@
         <div class="row" id="search-section"></div>
         <div class="row" id="main-section">
           <div class="col" id="current">
-            <h1>Berlin</h1>
+            <h1 id="city">Berlin</h1>
             <ul>
-              <li>Friday 07:00</li>
-              <li>Cloudy</li>
+              <li id="date">Friday 07:00</li>
+              <li id="description">Cloudy</li>
             </ul>
             <div class="row" id="current-temperature">
               <div class="col">
-                <span class="degree">17</span>
+                <span class="degrees" id="degrees">17</span>
                 <span class="units"><a href="#" id="celsius"> °C</a> |<a href="#" id="fahrenheit"> °F</a></span>
               </div>
               <div class="col">
@@ -46,9 +47,9 @@
               </div>
             </div>
             <ul>
-              <li>Feels like: 15°C</li>
-              <li>Wind: 5m/s</li>
-              <li>Humidity: 70%</li>
+              <li>🌡 Feels like: <span id="feels-like">15</span>°C</li>
+              <li>🍃 Wind: <span id="wind">5</span>m/s</li>
+              <li>💧 Humidity: <span id="humidity">70</span>%</li>
             </ul>
             <div class="tip">Enjoy your day! 🙂</div>
           </div>

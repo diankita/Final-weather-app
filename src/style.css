@@ -19,7 +19,11 @@ ul {
   padding: 0;
 }
 
-#current-temperature .degree {
+#description {
+  text-transform: capitalize;
+}
+
+#current-temperature .degrees {
   font-size: 50px;
   font-weight: 500;
 }
