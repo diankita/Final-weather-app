@@ -24,31 +24,35 @@
   <body>
     <div class="container">
       <div class="weather-app shadow">
-        <div class="search-section"></div>
-        <div class="main-section">
-          <div class="row">
-            <div class="col">
-              <h1>Berlin</h1>
-              <ul>
-                <li>Friday 07:00</li>
-                <li>Cloudy</li>
-              </ul>
-              <h2>
+        <div class="row" id="search-section"></div>
+        <div class="row" id="main-section">
+          <div class="col" id="current">
+            <h1>Berlin</h1>
+            <ul>
+              <li>Friday 07:00</li>
+              <li>Cloudy</li>
+            </ul>
+            <div class="row" id="current-temperature">
+              <div class="col">
+                <span class="degree">17</span>
+                <span class="units"><a href="#" id="celsius"> °C</a> |<a href="#" id="fahrenheit"> °F</a></span>
+              </div>
+              <div class="col">
                 <img
                   src="https://stalwart-bienenstitch-ab2f3f.netlify.app/images/03d.png"
                   alt="Cloudy"
-                  width="70"
+                  width="80"
                 />
-                <span>17°C | °F</span>
-              </h2>
-              <ul>
-                <li>Feels like: 15°C</li>
-                <li>Wind: 5m/s</li>
-                <li>Humidity: 70%</li>
-              </ul>
-              <div class="tip">Enjoy your day! 🙂</div>
+              </div>
             </div>
+            <ul>
+              <li>Feels like: 15°C</li>
+              <li>Wind: 5m/s</li>
+              <li>Humidity: 70%</li>
+            </ul>
+            <div class="tip">Enjoy your day! 🙂</div>
           </div>
+          <div class="col" id="forecast">Monday</div>
         </div>
       </div>
       <footer>
