@@ -25,31 +25,60 @@
   <body>
     <div class="container">
       <div class="weather-app shadow">
-        <div class="row" id="search-section"></div>
+        <div id="search-section">
+          <form class="row" id="search-form">
+            <div class="col-md-8 mb-2">
+              <input
+                type="search"
+                placeholder="Enter a city"
+                class="form-control"
+              />
+            </div>
+            <div class="col mb-2">
+              <button
+                type="submit"
+                value="Search"
+                class="btn btn-secondary w-100 shadow"
+              >Search
+              </button>
+            </div>
+            <div class="col mb-2">
+              <button
+                type="button"
+                class="btn btn-outline-secondary w-100 shadow"
+              >
+                📍
+              </button>
+            </div>
+          </form>
+        </div>
         <div class="row" id="main-section">
           <div class="col" id="current">
-            <h1>📍<span id="city">Berlin</span></h1>
+            <h1>📍<span id="city"></span></h1>
             <ul>
-              <li id="date">Friday 07:00</li>
-              <li id="description">Cloudy</li>
+              <li id="date"></li>
+              <li id="description"></li>
             </ul>
             <div class="row" id="current-temperature">
               <div class="col">
-                <span class="degrees" id="degrees">17</span>
-                <span class="units"><a href="#" id="celsius"> °C</a> |<a href="#" id="fahrenheit"> °F</a></span>
+                <span class="degrees" id="degrees"></span>
+                <span class="units"
+                  ><a href="#" id="celsius"> °C</a> |<a
+                    href="#"
+                    id="fahrenheit"
+                  >
+                    °F</a
+                  ></span
+                >
               </div>
               <div class="col">
-                <img
-                  src=""
-                  alt=""
-                  id="main-icon"
-                />
+                <img src="" alt="" id="main-icon" />
               </div>
             </div>
             <ul>
-              <li>🌡 Feels like: <span id="feels-like">15</span>°C</li>
-              <li>🍃 Wind: <span id="wind">5</span>m/s</li>
-              <li>💧 Humidity: <span id="humidity">70</span>%</li>
+              <li>🌡 Feels like: <span id="feels-like"></span>°C</li>
+              <li>🍃 Wind: <span id="wind"></span>m/s</li>
+              <li>💧 Humidity: <span id="humidity"></span>%</li>
             </ul>
             <div class="tip">Enjoy your day 🙂</div>
           </div>
@@ -61,9 +90,13 @@
         <a href="https://github.com/diankita/Final-weather-app" target="_blank"
           >open sourced on Github</a
         >
-        <br>
+        <br />
         Weather icons created by
-        <a href="https://www.flaticon.com/free-icons/weather" title="weather icons">iconixar - Flaticon</a>
+        <a
+          href="https://www.flaticon.com/free-icons/weather"
+          title="weather icons"
+          >iconixar - Flaticon</a
+        >
       </footer>
     </div>
     <script src="src/app.js"></script>
