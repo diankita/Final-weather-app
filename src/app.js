@@ -45,7 +45,10 @@ function showTemperature(response) {
   windElement.innerHTML = Math.round(response.data.wind.speed);
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = response.data.main.humidity;
-  console.log(response.data);
+  let iconSrc = response.data.weather[0].icon;
+  let iconElement = document.querySelector("#main-icon");
+  iconElement.setAttribute("src", `images/${iconSrc}.png`);
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 function searchCity(city) {
@@ -54,4 +57,4 @@ function searchCity(city) {
   axios.get(apiUrlCoords).then(getTemperatureBasedOnCoordinates);
 }
 
-searchCity("London");
+searchCity("Cancun");

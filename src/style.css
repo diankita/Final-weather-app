@@ -19,6 +19,13 @@ ul {
   padding: 0;
 }
 
+footer {
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  font-style: italic;
+  text-align: center;
+}
+
 li:first-letter {
   text-transform: capitalize;
 }
@@ -33,14 +40,13 @@ li:first-letter {
   top: -26px;
 }
 
+#main-icon {
+  width: 80px;
+}
+
 .tip {
   margin-top: 15px;
   font-size: 20px;
 }
 
-footer {
-  font-family: "Space Mono", monospace;
-  font-size: 12px;
-  font-style: italic;
-  text-align: center;
-}
+
