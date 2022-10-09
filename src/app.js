@@ -24,19 +24,21 @@ function formatDate(date) {
 formatDate(new Date());
 
 function getTemperatureBasedOnCoordinates(response) {
+  console.log(response.data)
   let lat = response.data[0].lat;
   let lon = response.data[0].lon;
   let units = "metric";
   let apiKey = "281450ec88936f4fa8ee9864682b49a0";
   let apiUrlTemp = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+
+  let cityElement = document.querySelector("#city");
+  cityElement.innerHTML = `${response.data[0].name}, ${response.data[0].country}`;
   axios.get(apiUrlTemp).then(showTemperature);
 }
 
 function showTemperature(response) {
   let temperatureElement = document.querySelector("#degrees");
   temperatureElement.innerHTML = Math.round(response.data.main.temp);
-  let cityElement = document.querySelector("#city");
-  cityElement.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
 
   let descriptionElement = document.querySelector("#description");
   descriptionElement.innerHTML = response.data.weather[0].description;
@@ -67,7 +69,7 @@ function showTemperature(response) {
 
 function searchCity(city) {
   let apiKey = "281450ec88936f4fa8ee9864682b49a0";
-  let apiUrlCoords = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=2&appid=${apiKey}`;
+  let apiUrlCoords = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
   axios.get(apiUrlCoords).then(getTemperatureBasedOnCoordinates);
 }
 
