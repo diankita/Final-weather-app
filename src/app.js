@@ -24,8 +24,8 @@ function formatDate(date) {
 
 formatDate(new Date());
 
-function getCityName(openweatherResponse) {
-  return `${openweatherResponse.data[0].name}, ${openweatherResponse.data[0].country}`;
+function formatCityName(city, country) {
+  return `${city}, ${country}`;
 }
 function showInformation(city, response) {
   let cityElement = document.querySelector("#city");
@@ -51,13 +51,13 @@ function showInformation(city, response) {
 
   let feelsLikeElement = document.querySelector("#feels-like");
   feelsLikeElement.innerHTML = Math.round(response.data.main.feels_like);
-  
+
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
-  
+
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = response.data.main.humidity;
-  
+
   let iconSrc = response.data.weather[0].icon;
   let iconElement = document.querySelector("#main-icon");
   iconElement.setAttribute("src", `images/${iconSrc}.png`);
@@ -79,7 +79,10 @@ function getTemperatureBasedOnCurrentPosition(position) {
   let units = "metric";
   let apiUrlPosition = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrlPosition).then(function (response) {
-    let cityName = getCityName(response);
+    let cityName = formatCityName(
+      response.data.name,
+      response.data.sys.country
+    );
     showInformation(cityName, response);
   });
 }
@@ -100,8 +103,10 @@ function getTemperatureBasedOnCityCoordinates(response) {
   let apiKey = "281450ec88936f4fa8ee9864682b49a0";
   let apiUrlTemp = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
 
-  // let cityElement = document.querySelector("#city");
-  const cityName = getCityName(response);
+  const cityName = formatCityName(
+    response.data[0].name,
+    response.data[0].country
+  );
   axios.get(apiUrlTemp).then(function (response) {
     showInformation(cityName, response);
   });
