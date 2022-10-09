@@ -37,8 +37,22 @@ function showTemperature(response) {
   temperatureElement.innerHTML = Math.round(response.data.main.temp);
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
+
   let descriptionElement = document.querySelector("#description");
   descriptionElement.innerHTML = response.data.weather[0].description;
+
+  if (response.data.weather[0].description.includes("rain")) {
+    document.querySelector(
+      "#tip"
+    ).innerHTML = `Don't forget to take an umbrella 🌂`;
+  } else if (Math.round(response.data.main.temp) < 15) {
+    document.querySelector(
+      "#tip"
+    ).innerHTML = `Don't forget to take a jacket 🧥`;
+  } else {
+    document.querySelector("#tip").innerHTML = `Enjoy your day 🙂`;
+  }
+
   let feelsLikeElement = document.querySelector("#feels-like");
   feelsLikeElement.innerHTML = Math.round(response.data.main.feels_like);
   let windElement = document.querySelector("#wind");
@@ -53,8 +67,16 @@ function showTemperature(response) {
 
 function searchCity(city) {
   let apiKey = "281450ec88936f4fa8ee9864682b49a0";
-  let apiUrlCoords = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
+  let apiUrlCoords = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=2&appid=${apiKey}`;
   axios.get(apiUrlCoords).then(getTemperatureBasedOnCoordinates);
 }
 
 searchCity("Cancun");
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input").value;
+  searchCity(cityInputElement)
+}
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", handleSubmit);
