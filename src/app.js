@@ -23,16 +23,16 @@ function formatDate(date) {
 
 formatDate(new Date());
 
-function getTemperatureBasedOnCoordinates(response) {
-  console.log(response.data)
-  let lat = response.data[0].lat;
-  let lon = response.data[0].lon;
+function getTemperatureBasedOnCoordinates(position) {
+  console.log(position.data)
+  let lat = position.data[0].lat;
+  let lon = position.data[0].lon;
   let units = "metric";
   let apiKey = "281450ec88936f4fa8ee9864682b49a0";
   let apiUrlTemp = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
 
   let cityElement = document.querySelector("#city");
-  cityElement.innerHTML = `${response.data[0].name}, ${response.data[0].country}`;
+  cityElement.innerHTML = `${position.data[0].name}, ${position.data[0].country}`;
   axios.get(apiUrlTemp).then(showTemperature);
 }
 
@@ -82,3 +82,10 @@ function handleSubmit(event) {
 }
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSubmit);
+
+function getCurrentPosition() {
+  navigator.geolocation.getCurrentPosition(getTemperatureBasedOnCoordinates)
+}
+
+let currentPositionBtn = document.querySelector("#current-position-btn");
+currentPositionBtn.addEventListener("click", getCurrentPosition);
