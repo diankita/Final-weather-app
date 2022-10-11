@@ -33,13 +33,13 @@ function getTemperatureBasedOnCoordinates(position) {
 
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = `${position.data[0].name}, ${position.data[0].country}`;
-  axios.get(apiUrlTemp).then(showTemperature);
+  axios.get(apiUrlTemp).then(showCurrentInformation);
 }
 
-function showTemperature(response) {
-  console.log(response.data)
+function showCurrentInformation(response) {
   let temperatureElement = document.querySelector("#degrees");
-  temperatureElement.innerHTML = Math.round(response.data.main.temp);
+  celsiusTemp = response.data.main.temp;
+  temperatureElement.innerHTML = Math.round(celsiusTemp);
 
   let descriptionElement = document.querySelector("#description");
   descriptionElement.innerHTML = response.data.weather[0].description;
@@ -57,11 +57,15 @@ function showTemperature(response) {
   }
 
   let feelsLikeElement = document.querySelector("#feels-like");
-  feelsLikeElement.innerHTML = Math.round(response.data.main.feels_like);
+  celsiusFeelsLikeTemp = response.data.main.feels_like
+  feelsLikeElement.innerHTML = `${Math.round(celsiusFeelsLikeTemp)}°C`;
+
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
+
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = response.data.main.humidity;
+
   let iconSrc = response.data.weather[0].icon;
   let iconElement = document.querySelector("#main-icon");
   iconElement.setAttribute("src", `images/${iconSrc}.png`);
@@ -74,15 +78,11 @@ function searchCity(city) {
   axios.get(apiUrlCoords).then(getTemperatureBasedOnCoordinates);
 }
 
-searchCity("Cancun");
-
 function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#city-input").value;
   searchCity(cityInputElement);
 }
-let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", handleSubmit);
 
 function searchPosition(position) {
   let lat = position.coords.latitude;
@@ -94,7 +94,7 @@ function searchPosition(position) {
     document.querySelector(
       "#city"
     ).innerHTML = `${response.data.name}, ${response.data.sys.country}`;
-    showTemperature(response)
+    showCurrentInformation(response);
   });
 }
 
@@ -103,5 +103,43 @@ function getCurrentPosition(event) {
   navigator.geolocation.getCurrentPosition(searchPosition);
 }
 
+function showFahrenheitTemp(event) {
+  event.preventDefault();
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
+  let temperatureElement = document.querySelector("#degrees");
+  temperatureElement.innerHTML = Math.round(fahrenheitTemp);
+
+  let fahrenheitFeelsLikeTemp = (celsiusFeelsLikeTemp * 9) / 5 + 32;
+  let feelsLikeElement = document.querySelector("#feels-like");
+  feelsLikeElement.innerHTML = `${Math.round(fahrenheitFeelsLikeTemp)}°F`;
+}
+
+function showCelsiusTemp(event) {
+  event.preventDefault();
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+  let temperatureElement = document.querySelector("#degrees");
+  temperatureElement.innerHTML = Math.round(celsiusTemp);
+
+  let feelsLikeElement = document.querySelector("#feels-like");
+  feelsLikeElement.innerHTML = `${Math.round(celsiusFeelsLikeTemp)}°C`;
+}
+
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", handleSubmit);
+
 let currentPositionBtn = document.querySelector("#current-position-btn");
 currentPositionBtn.addEventListener("click", getCurrentPosition);
+
+let celsiusTemp = null;
+let celsiusFeelsLikeTemp = null;
+
+let fahrenheitLink = document.querySelector("#fahrenheit");
+fahrenheitLink.addEventListener("click", showFahrenheitTemp);
+
+let celsiusLink = document.querySelector("#celsius");
+celsiusLink.addEventListener("click", showCelsiusTemp);
+
+searchCity("Cancun");
