@@ -1,4 +1,8 @@
+/* body {
+  background: #defcf9;
+} */
 .weather-app {
+  background: #fff;
   border-radius: 8px;
   font-family: "Poppins", sans-serif;
   max-width: 800px;
@@ -58,3 +62,27 @@ li:first-letter {
   margin-top: 15px;
   font-size: 20px;
 }
+
+.forecast-information {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.forecast-temp {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  margin-top: 10px;
+
+}
+
+.forecast-temp-min {
+  color: #6c6c6c;
+}
+
+.forecast-day {
+  font-size: 14px;
+  color: #6c6c6c;
+}
+

@@ -57,7 +57,7 @@
           </form>
         </div>
         <div class="row" id="main-section">
-          <div class="col" id="current">
+          <div class="col-md-5" id="current-weather-section">
             <h1>📍<span id="city"></span></h1>
             <ul>
               <li id="date"></li>
@@ -80,13 +80,24 @@
               </div>
             </div>
             <ul>
-              <li>🌡 Feels like: <span id="feels-like"></span></li>
+              <li>🌡 Feels like: <span id="feels-like"></span>°</li>
               <li>🍃 Wind: <span id="wind"></span>m/s</li>
               <li>💧 Humidity: <span id="humidity"></span>%</li>
             </ul>
             <div class="tip" id="tip">Enjoy your day 🙂</div>
           </div>
-          <div class="col" id="forecast">Monday</div>
+          <div class="col-md-7" id="weather-forecast-section">
+            <div class="row">
+              <div class="col-4 forecast-information">
+                <img src="images/01d.png" alt="" width="30px" />
+                <div class="forecast-temp">
+                  <span class="forecast-temp-max">17° </span
+                  ><span class="forecast-temp-min">10°</span>
+                </div>
+                <div class="forecast-day">Monday</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <footer>

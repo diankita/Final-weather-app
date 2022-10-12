@@ -58,7 +58,7 @@ function showCurrentInformation(response) {
 
   let feelsLikeElement = document.querySelector("#feels-like");
   celsiusFeelsLikeTemp = response.data.main.feels_like
-  feelsLikeElement.innerHTML = `${Math.round(celsiusFeelsLikeTemp)}°C`;
+  feelsLikeElement.innerHTML = Math.round(celsiusFeelsLikeTemp);
 
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
@@ -113,7 +113,7 @@ function showFahrenheitTemp(event) {
 
   let fahrenheitFeelsLikeTemp = (celsiusFeelsLikeTemp * 9) / 5 + 32;
   let feelsLikeElement = document.querySelector("#feels-like");
-  feelsLikeElement.innerHTML = `${Math.round(fahrenheitFeelsLikeTemp)}°F`;
+  feelsLikeElement.innerHTML = Math.round(fahrenheitFeelsLikeTemp);
 }
 
 function showCelsiusTemp(event) {
@@ -124,7 +124,7 @@ function showCelsiusTemp(event) {
   temperatureElement.innerHTML = Math.round(celsiusTemp);
 
   let feelsLikeElement = document.querySelector("#feels-like");
-  feelsLikeElement.innerHTML = `${Math.round(celsiusFeelsLikeTemp)}°C`;
+  feelsLikeElement.innerHTML = Math.round(celsiusFeelsLikeTemp);
 }
 
 let searchForm = document.querySelector("#search-form");
