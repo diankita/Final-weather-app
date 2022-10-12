@@ -72,6 +72,28 @@ function showCurrentInformation(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
+function showForecastInformation() {
+  let forecastElement = document.querySelector("#weather-forecast-section");
+  
+  let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function(day) {
+    forecastHTML =
+    forecastHTML +
+    `<div class="col-4 forecast-information">
+                <img src="images/01d.png" alt="" width="30px" />
+                <div class="forecast-temp">
+                  <span class="forecast-temp-max">17° </span
+                  ><span class="forecast-temp-min">10°</span>
+                </div>
+                <div class="forecast-day">${day}</div>
+              </div>`;});
+
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML; 
+}
+
 function searchCity(city) {
   let apiKey = "281450ec88936f4fa8ee9864682b49a0";
   let apiUrlCoords = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
@@ -143,3 +165,4 @@ let celsiusLink = document.querySelector("#celsius");
 celsiusLink.addEventListener("click", showCelsiusTemp);
 
 searchCity("Cancun");
+showForecastInformation();
