@@ -45,22 +45,22 @@ li:first-letter {
 }
 
 #current-temperature a {
-  color: rgb(33,37,41);
+  color: rgb(33, 37, 41);
   text-decoration: none;
 }
 
 #current-temperature .active {
   font-weight: bold;
-
 }
 
 #main-icon {
-  width: 80px;
+  height: 70px;
+  width: 70px;
 }
 
 .tip {
   margin-top: 15px;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .forecast-information {
@@ -74,7 +74,6 @@ li:first-letter {
   font-weight: 600;
   margin-bottom: 6px;
   margin-top: 10px;
-
 }
 
 .forecast-temp-min {
@@ -85,4 +84,3 @@ li:first-letter {
   font-size: 14px;
   color: #6c6c6c;
 }
-
