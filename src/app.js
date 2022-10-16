@@ -35,18 +35,13 @@ function formatForecastDayBasedOnApiResponse(timestamp) {
     "Wednesday",
     "Thursday",
     "Friday",
-    "Saturday"
+    "Saturday",
   ];
 
   return weekdays[forecastWeekday];
 }
 
 // ===== search city =====
-function searchCity(city) {
-  let apiUrlCoords = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
-  axios.get(apiUrlCoords).then(getTemperatureBasedOnCoordinates);
-}
-
 function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#city-input").value;
@@ -54,17 +49,36 @@ function handleSubmit(event) {
   searchCity(cityInputElement);
 }
 
-// ===== search current position =====
+function searchCity(city) {
+  let apiUrlCoords = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
+  axios.get(apiUrlCoords).then(getTemperatureBasedOnCoordinates);
+}
+
+function getTemperatureBasedOnCoordinates(position) {
+  let lat = position.data[0].lat;
+  let lon = position.data[0].lon;
+  let apiUrlTemp = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrlTemp).then(showUpdatedWeatherDetails);
+
+  let cityElement = document.querySelector("#city");
+  cityElement.innerHTML = `${position.data[0].name}, ${position.data[0].country}`;
+
+}// ===== search current position =====
 function searchPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
+  let apiUrlCoords = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${apiKey}`;
+  axios.get(apiUrlCoords).then(getTemperatureBasedOnCurrentPosition);
+}
+
+function getTemperatureBasedOnCurrentPosition(currentPosition) {
+  let lat = currentPosition.data[0].lat;
+  let lon = currentPosition.data[0].lon;
   let apiUrlTemp = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=${units}`;
-  axios.get(apiUrlTemp).then(function (response) {
-    document.querySelector(
-      "#city"
-    ).innerHTML = `${response.data.name}, ${response.data.sys.country}`;
-    showUpdatedWeatherDetails(response);
-  });
+  axios.get(apiUrlTemp).then(showUpdatedWeatherDetails);
+
+  let currentCity = document.querySelector("#city");
+  currentCity.innerHTML = `${currentPosition.data[0].name}, ${currentPosition.data[0].country}`
 }
 
 function getCurrentPosition(event) {
@@ -73,16 +87,6 @@ function getCurrentPosition(event) {
 }
 
 // ===== show weather info =====
-function getTemperatureBasedOnCoordinates(position) {
-  let lat = position.data[0].lat;
-  let lon = position.data[0].lon;
-  let apiUrlTemp = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=${units}`;
-
-  let cityElement = document.querySelector("#city");
-  cityElement.innerHTML = `${position.data[0].name}, ${position.data[0].country}`;
-  axios.get(apiUrlTemp).then(showUpdatedWeatherDetails);
-}
-
 function showUpdatedWeatherDetails(response) {
   let apiResponseCurrentWeather = response.data.current;
 
@@ -91,9 +95,13 @@ function showUpdatedWeatherDetails(response) {
   temperatureElement.innerHTML = Math.round(celsiusTemp);
 
   let descriptionElement = document.querySelector("#description");
-  descriptionElement.innerHTML = apiResponseCurrentWeather.weather[0].description;
+  descriptionElement.innerHTML =
+    apiResponseCurrentWeather.weather[0].description;
 
-  if (apiResponseCurrentWeather.weather[0].description.includes("rain") || apiResponseCurrentWeather.weather[0].description.includes("thunderstorm")) {
+  if (
+    apiResponseCurrentWeather.weather[0].description.includes("rain") ||
+    apiResponseCurrentWeather.weather[0].description.includes("thunderstorm")
+  ) {
     document.querySelector("#tip").innerHTML = `Don't forget your umbrella 🌂`;
   } else if (Math.round(apiResponseCurrentWeather.temp) < 15) {
     document.querySelector("#tip").innerHTML = `Don't forget your jacket 🧥`;
@@ -114,7 +122,10 @@ function showUpdatedWeatherDetails(response) {
   let iconSrc = apiResponseCurrentWeather.weather[0].icon;
   let iconElement = document.querySelector("#main-icon");
   iconElement.setAttribute("src", `images/${iconSrc}.png`);
-  iconElement.setAttribute("alt", apiResponseCurrentWeather.weather[0].description);
+  iconElement.setAttribute(
+    "alt",
+    apiResponseCurrentWeather.weather[0].description
+  );
 
   let apiResponseForecast = response.data.daily;
 
@@ -123,9 +134,9 @@ function showUpdatedWeatherDetails(response) {
   let forecastHTML = `<div class="row">`;
   apiResponseForecast.forEach(function (forecastDay, index) {
     if (index < 6) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-4 forecast-information">
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-4 forecast-information">
                 <div class="forecast-day">${formatForecastDayBasedOnApiResponse(
                   forecastDay.dt
                 )}</div>
@@ -141,13 +152,14 @@ function showUpdatedWeatherDetails(response) {
                   )}°</span>
                 </div>
                 
-                <div class="forecast-description">${forecastDay.weather[0].description}</div>
+                <div class="forecast-description">${
+                  forecastDay.weather[0].description
+                }</div>
               </div>`;
-  }
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
-
 }
 
 let searchForm = document.querySelector("#search-form");

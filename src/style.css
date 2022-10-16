@@ -1,6 +1,7 @@
-/* body {
-  background: #defcf9;
-} */
+body {
+  background: #f6f6f6;
+}
+
 .weather-app {
   background: #fff;
   border-radius: 8px;
@@ -51,7 +52,7 @@ li:first-letter {
 }
 
 .tip {
-  margin-top: 15px;
+  margin: 10px 0px;
   font-size: 18px;
 }
 
