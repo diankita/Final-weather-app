@@ -12,7 +12,7 @@
 }
 
 h1 {
-  font-size: 36px;
+  font-size: 34px;
 }
 
 ul {
@@ -64,23 +64,33 @@ li:first-letter {
 }
 
 .forecast-information {
-  margin-top: 30px;
-  margin-bottom: 15px;
+  /* margin-top: 20px; */
+  margin-bottom: 20px;
   text-align: center;
+}
+.forecast-day {
+  font-size: 14px;
+  color: #6c6c6c;
+  margin: 4px 0px;
+
 }
 
 .forecast-temp {
   font-size: 15px;
   font-weight: 600;
-  margin-bottom: 6px;
-  margin-top: 10px;
+  margin: 4px 0px;
 }
 
 .forecast-temp-min {
   color: #6c6c6c;
 }
 
-.forecast-day {
-  font-size: 14px;
+.forecast-description {
+  font-size: 11px;
+  font-style: italic;
   color: #6c6c6c;
+}
+
+.forecast-description:first-letter {
+  text-transform: capitalize;
 }

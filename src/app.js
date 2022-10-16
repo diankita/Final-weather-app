@@ -74,7 +74,6 @@ function getCurrentPosition(event) {
 
 // ===== show weather info =====
 function getTemperatureBasedOnCoordinates(position) {
-  console.log("getTemperatureBasedOnCoordinates", position.data[0]);
   let lat = position.data[0].lat;
   let lon = position.data[0].lon;
   let apiUrlTemp = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=${units}`;
@@ -85,7 +84,6 @@ function getTemperatureBasedOnCoordinates(position) {
 }
 
 function showUpdatedWeatherDetails(response) {
-  console.log("showUpdatedWeatherDetails", response.data);
   let apiResponseCurrentWeather = response.data.current;
 
   let temperatureElement = document.querySelector("#degrees");
@@ -128,12 +126,22 @@ function showUpdatedWeatherDetails(response) {
     forecastHTML =
       forecastHTML +
       `<div class="col-4 forecast-information">
-                <img src="images/${forecastDay.weather[0].icon}.png" alt="" width="30px" />
+                <div class="forecast-day">${formatForecastDayBasedOnApiResponse(
+                  forecastDay.dt
+                )}</div>
+                <img src="images/${
+                  forecastDay.weather[0].icon
+                }.png" alt="" width="30px" />
                 <div class="forecast-temp">
-                  <span class="forecast-temp-max">${Math.round(forecastDay.temp.max)}° </span
-                  ><span class="forecast-temp-min">${Math.round(forecastDay.temp.min)}°</span>
+                  <span class="forecast-temp-max">${Math.round(
+                    forecastDay.temp.max
+                  )}° </span
+                  ><span class="forecast-temp-min">${Math.round(
+                    forecastDay.temp.min
+                  )}°</span>
                 </div>
-                <div class="forecast-day">${formatForecastDayBasedOnApiResponse(forecastDay.dt)}</div>
+                
+                <div class="forecast-description">${forecastDay.weather[0].description}</div>
               </div>`;
   }
   });
@@ -141,46 +149,6 @@ function showUpdatedWeatherDetails(response) {
   forecastElement.innerHTML = forecastHTML;
 
 }
-
-// ===== show forecast info =====
-// function showForecastInformation() {
-//   let forecastElement = document.querySelector("#weather-forecast-section");
-
-//   let days = [
-//     "Monday",
-//     "Tuesday",
-//     "Wednesday",
-//     "Thursday",
-//     "Friday",
-//     "Saturday",
-//   ];
-//   let forecastHTML = `<div class="row">`;
-//   days.forEach(function (day) {
-//     forecastHTML =
-//       forecastHTML +
-//       `<div class="col-4 forecast-information">
-//                 <img src="images/01d.png" alt="" width="30px" />
-//                 <div class="forecast-temp">
-//                   <span class="forecast-temp-max">17° </span
-//                   ><span class="forecast-temp-min">10°</span>
-//                 </div>
-//                 <div class="forecast-day">${day}</div>
-//               </div>`;
-//   });
-
-//   forecastHTML = forecastHTML + `</div>`;
-//   forecastElement.innerHTML = forecastHTML;
-// }
-
-// function getForecastBasedOnCoordinates(position) {
-//   console.log("getForecastBasedOnCoordinates", position.data[0]);
-//   let lat = position.data[0].lat;
-//   let lon = position.data[0].lon;
-//   let apiUrlTemp = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=${units}`;
-//   console.log(apiUrlTemp)
-
-//   axios.get(apiUrlTemp).then(showForecastInformation);
-// }
 
 // ====== unit conversion =======
 function showFahrenheitTemp(event) {
@@ -229,4 +197,3 @@ let city = "Cancun";
 let units = "metric";
 
 searchCity(city);
-// showForecastInformation();
