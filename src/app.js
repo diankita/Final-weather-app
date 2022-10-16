@@ -150,47 +150,11 @@ function showUpdatedWeatherDetails(response) {
 
 }
 
-// ====== unit conversion =======
-function showFahrenheitTemp(event) {
-  event.preventDefault();
-
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
-  let temperatureElement = document.querySelector("#degrees");
-  temperatureElement.innerHTML = Math.round(fahrenheitTemp);
-
-  let fahrenheitFeelsLikeTemp = (celsiusFeelsLikeTemp * 9) / 5 + 32;
-  let feelsLikeElement = document.querySelector("#feels-like");
-  feelsLikeElement.innerHTML = Math.round(fahrenheitFeelsLikeTemp);
-}
-
-function showCelsiusTemp(event) {
-  event.preventDefault();
-
-  fahrenheitLink.classList.remove("active");
-  celsiusLink.classList.add("active");
-  let temperatureElement = document.querySelector("#degrees");
-  temperatureElement.innerHTML = Math.round(celsiusTemp);
-
-  let feelsLikeElement = document.querySelector("#feels-like");
-  feelsLikeElement.innerHTML = Math.round(celsiusFeelsLikeTemp);
-}
-
-let celsiusTemp = null;
-let celsiusFeelsLikeTemp = null;
-
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSubmit);
 
 let currentPositionBtn = document.querySelector("#current-position-btn");
 currentPositionBtn.addEventListener("click", getCurrentPosition);
-
-let fahrenheitLink = document.querySelector("#fahrenheit");
-fahrenheitLink.addEventListener("click", showFahrenheitTemp);
-
-let celsiusLink = document.querySelector("#celsius");
-celsiusLink.addEventListener("click", showCelsiusTemp);
 
 let apiKey = "281450ec88936f4fa8ee9864682b49a0";
 let city = "Cancun";

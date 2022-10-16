@@ -42,15 +42,7 @@ li:first-letter {
 #current-temperature .units {
   position: relative;
   top: -26px;
-}
-
-#current-temperature a {
-  color: rgb(33, 37, 41);
-  text-decoration: none;
-}
-
-#current-temperature .active {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 #main-icon {
@@ -64,7 +56,6 @@ li:first-letter {
 }
 
 .forecast-information {
-  /* margin-top: 20px; */
   margin-bottom: 20px;
   text-align: center;
 }
